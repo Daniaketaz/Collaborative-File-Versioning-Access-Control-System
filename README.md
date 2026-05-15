@@ -1,66 +1,408 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Digital Library Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A collaborative digital file management system developed using Laravel that allows users to securely upload, manage, reserve, edit, and track shared files inside controlled groups.
 
-## About Laravel
+The system prevents concurrent editing conflicts using a safe source mechanism based on file locking (`in-check` / `out-check`) while providing user permissions, activity tracing, notifications, reporting, backup management, and concurrency handling.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Secure File Upload & Management
+- File Reservation System (Safe Source)
+- Concurrent Access Protection
+- Group-Based File Permissions
+- File Check-In / Check-Out Workflow
+- Activity Logs & Tracing
+- Automatic Backup System
+- Real-Time Notifications
+- Reporting & Exporting
+- Responsive & User-Friendly Interface
+- Multi-User Parallel Processing Support
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Core Functionalities
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Authentication & Authorization
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- User registration and login
+- Role-based permissions
+- Secure access control for groups and files
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Group Management
 
-### Premium Partners
+Users can:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- Create groups
+- Invite other users to groups
+- Search for users before inviting them
+- Manage group members
 
-## Contributing
+### Group Owner Permissions
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+The group creator can:
 
-## Code of Conduct
+- Add files
+- Edit files
+- Delete files
+- Approve uploaded files from members
+- Review member activity logs
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Group Member Permissions
 
-## Security Vulnerabilities
+Members can:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Browse joined groups
+- Upload new files
+- View accessible files
+- Request file operations
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## File Management
+
+- Upload digital files securely
+- Organize files inside groups
+- Track file states:
+  - Free
+  - Reserved/In Use
+
+Each file includes:
+- File metadata
+- Reservation status
+- Current editor
+- Operation history
+
+---
+
+## Safe Source Mechanism (Check-In / Check-Out)
+
+The system prevents two users from editing the same file simultaneously.
+
+### Check-Out (Out-Check)
+
+- User reserves a free file
+- File becomes locked for other users
+- User downloads and edits the file locally
+
+### Check-In (In-Check)
+
+- User uploads the modified version
+- New file must have:
+  - Same filename
+  - Same extension
+
+- System replaces the old version
+- File becomes available again
+
+---
+
+## Concurrent Access Protection
+
+The system guarantees:
+
+- No two users can reserve the same file simultaneously
+- Atomic reservation operations
+- Multi-file reservation support:
+  - Either all selected files are reserved successfully
+  - Or none are reserved
+
+---
+
+## Activity Logging & Tracing
+
+### File Logs
+
+Each group contains file-level logs showing:
+
+- File operations
+- Who performed them
+- Operation timestamps
+
+Accessible to all group members.
+
+### User Logs
+
+The group creator can review:
+
+- Member activities
+- File modifications
+- Reservation history
+- User actions timeline
+
+### Admin Tracing
+
+Admin users can:
+
+- Monitor all system operations
+- Track who edited files
+- Review timestamps and modifications
+- Access all logs and histories
+
+---
+
+## Backup System
+
+Automatic backups are created:
+
+- Before check-out operations
+- After check-in operations
+
+This allows restoring previous file versions when needed.
+
+---
+
+## Notifications System
+
+The system sends notifications when:
+
+- File status changes
+- Files are reserved
+- Files are released
+- Files are modified
+
+Notifications are sent to users who have access to the related files.
+
+---
+
+## Reporting System
+
+Generate reports based on:
+
+- File activities
+- User operations
+- Reservation history
+- Modification tracking
+
+### Export Support
+
+Reports can be exported as:
+
+- CSV
+- PDF
+
+---
+
+## Parallel User Support
+
+The system is designed to support high concurrency and simultaneous users.
+
+Includes:
+- Concurrent processing handling
+- Reservation synchronization
+- Performance testing support using tools like:
+  - JMeter
+
+---
+
+## Responsive User Interface
+
+The application is designed to work across:
+
+- Desktop devices
+- Tablets
+- Smartphones
+
+Compatible with modern web browsers.
+
+---
+
+# User Roles
+
+## Admin
+
+- Full system access
+- Monitor all users and groups
+- Access all logs and reports
+- Track file modifications and activities
+
+---
+
+## Group Owner
+
+- Create and manage groups
+- Invite/remove members
+- Manage files
+- Approve uploads
+- Review member activity logs
+
+---
+
+## Group Member
+
+- Access authorized groups
+- Upload files
+- Reserve files
+- Edit and return files
+- View accessible logs
+
+---
+
+# Technology Stack
+
+| Technology | Description |
+|------------|-------------|
+| PHP 8+ | Backend Language |
+| Laravel | Backend Framework |
+| Blade | Frontend Templating |
+| MySQL | Database |
+| JavaScript | Client-side Functionality |
+| RESTful Architecture | API & System Structure |
+
+---
+
+# System Architecture
+
+The project follows a layered architecture:
+
+- Views + Controllers → Presentation Layer
+- Services → Business Logic Layer
+- Models + Database → Data Layer
+- Repository Layer (optional for reusable queries)
+
+This structure improves:
+
+- Scalability
+- Maintainability
+- Clean code organization
+- Separation of concerns
+
+---
+
+# Non-Functional Requirements
+
+Implemented non-functional requirements include:
+
+- Concurrent multi-user support
+- Automatic backup system
+- Responsive UI
+- System usability
+- Reporting export functionality
+
+---
+
+# Getting Started
+
+## Prerequisites
+
+- PHP ≥ 8.0
+- Composer
+- MySQL/MariaDB
+- Node.js & NPM
+
+---
+
+# Installation
+
+## Clone the Repository
+
+```bash
+git clone https://github.com/Daniaketaz/digital-library-management-system.git
+cd digital-library-management-system
+```
+
+---
+
+## Install PHP Dependencies
+
+```bash
+composer install
+```
+
+---
+
+## Install Node Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## Configure Environment
+
+```bash
+cp .env.example .env
+```
+
+Update your database credentials inside `.env`.
+
+---
+
+## Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+---
+
+## Run Migrations
+
+```bash
+php artisan migrate
+```
+
+---
+
+## Run the Application
+
+```bash
+php artisan serve
+```
+
+Open:
+
+```text
+http://localhost:8000
+```
+
+---
+
+# Usage Workflow
+
+1. Register/Login
+2. Create or join groups
+3. Upload files
+4. Reserve files using check-out
+5. Edit files locally
+6. Upload modified files using check-in
+7. Review logs and reports
+
+---
+
+# Project Structure
+
+- `app/` → Controllers, Models, Services
+- `resources/views/` → Blade templates
+- `routes/` → Web & API routes
+- `public/` → Public assets
+- `database/` → Migrations & seeders
+
+---
+
+# Future Improvements
+
+- Real-time collaboration
+- File version comparison
+- Cloud storage integration
+- Real-time notifications using WebSockets
+- Advanced permission management
+- Mobile application support
+
+---
+
+# License
+
+This project is licensed under the MIT License.
+
+---
+
+# Author
+
+GitHub: [Daniaketaz](https://github.com/Daniaketaz)
+
+---
