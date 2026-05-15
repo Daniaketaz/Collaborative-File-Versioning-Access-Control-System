@@ -1,4 +1,4 @@
-# Digital Library Management System
+ # Digital Library Management System
 
 A collaborative digital file management system developed using Laravel that allows users to securely upload, manage, reserve, edit, and track shared files inside controlled groups.
 
@@ -15,7 +15,6 @@ The system prevents concurrent editing conflicts using a safe source mechanism b
 - File Check-In / Check-Out Workflow
 - Activity Logs & Tracing
 - Automatic Backup System
-- Real-Time Notifications
 - Reporting & Exporting
 - Responsive & User-Friendly Interface
 - Multi-User Parallel Processing Support
@@ -311,16 +310,7 @@ cd digital-library-management-system
 ```bash
 composer install
 ```
-
----
-
-## Install Node Dependencies
-
-```bash
-npm install
-```
-
----
+``
 
 ## Configure Environment
 
@@ -381,17 +371,6 @@ http://localhost:8000
 - `routes/` → Web & API routes
 - `public/` → Public assets
 - `database/` → Migrations & seeders
-
----
-
-# Future Improvements
-
-- Real-time collaboration
-- File version comparison
-- Cloud storage integration
-- Real-time notifications using WebSockets
-- Advanced permission management
-- Mobile application support
 
 ---
 
