@@ -97,6 +97,7 @@ The system prevents two users from editing the same file simultaneously.
 - System replaces the old version
 - File becomes available again
 
+
 ---
 
 ## Concurrent Access Protection
