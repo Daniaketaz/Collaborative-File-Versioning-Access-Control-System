@@ -1,8 +1,8 @@
- # Digital Library Management System
+# Collaborative File Versioning & Access Control System
 
-A collaborative digital file management system developed using Laravel that allows users to securely upload, manage, reserve, edit, and track shared files inside controlled groups.
+A collaborative file versioning and access control system built with Laravel that allows users to securely upload, manage, reserve, edit, and track shared files inside controlled groups.
 
-The system prevents concurrent editing conflicts using a safe source mechanism based on file locking (`in-check` / `out-check`) while providing user permissions, activity tracing, notifications, reporting, backup management, and concurrency handling.
+The system prevents concurrent editing conflicts using a safe source mechanism based on file locking (`in-check` / `out-check`) while providing user permissions, activity tracing, notifications, automatic backup, reporting, and a responsive user interface.
 
 ---
 
@@ -300,8 +300,8 @@ Implemented non-functional requirements include:
 ## Clone the Repository
 
 ```bash
-git clone https://github.com/Daniaketaz/digital-library-management-system.git
-cd digital-library-management-system
+git clone https://github.com/Daniaketaz/collaborative-file-versioning-system.git
+cd collaborative-file-versioning-system
 ```
 
 ---
@@ -311,7 +311,6 @@ cd digital-library-management-system
 ```bash
 composer install
 ```
-``
 
 ## Configure Environment
 
